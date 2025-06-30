@@ -1,7 +1,10 @@
 import 'dart:math';
 
+import 'package:dart_collections_journey/names.dart';
+
 void main() {
   runTask1();
+  runTask2();
 }
 
 void runTask1() {
@@ -14,10 +17,11 @@ void runTask1() {
 
   // 2. Виведіть цей список на екран.
   print(numbers);
+  print("-" * 10);
 
   // 3. Виведіть на екран 65-й елемент списку у форматі: "65-й елемент: [значення]".
   print("65-й елемент: ${numbers[64]}");
-
+  print("-" * 10);
   // 4.Вставте число 1000000000 на 50-ту позицію списку.
   numbers.insert(50, 1000000000);
 
@@ -33,7 +37,7 @@ void runTask1() {
     }
   }
   print("Сума всіх елементів, що діляться на 3 без залишку: $sum");
-
+  print("-" * 10);
   // 7. Створіть порожній список temp. За допомогою циклу for-in переберіть numbers.
   // Додайте до temp лише ті елементи, що діляться на 2 без залишку.
   final List<int> temp = [];
@@ -44,9 +48,28 @@ void runTask1() {
   }
   print("Список елементів, що діляться на 2 без залишку");
   print(temp);
-
+  print("-" * 10);
   // 8. Виведіть довжину списку temp.
   print(
     "Довжина списку елементів, що діляться на 2 без залишку: ${temp.length}",
   );
+}
+
+void runTask2() {
+  print('------------------- Task 2 -------------------');
+  final uniqueNames1 = Set.from(ukrainianNames1);
+  final uniqueNames2 = Set.from(ukrainianNames2);
+
+  final uniqueNames = uniqueNames1.union(uniqueNames2);
+  print("Кількість унікальних імен: ${uniqueNames.length}");
+  print("-" * 10);
+
+  final uniqueNames1NotIn2 = uniqueNames1.difference(uniqueNames2);
+  print("Імена, що є в uniqueNames1, але яких немає в uniqueNames2:");
+  print(uniqueNames1NotIn2);
+  print("-" * 10);
+
+  final uniqueNames2NotIn1 = uniqueNames2.difference(uniqueNames1);
+  print("Імена, що є в uniqueNames2, але яких немає в uniqueNames1:");
+  print(uniqueNames2NotIn1);
 }
