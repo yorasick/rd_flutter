@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:dart_collections_journey/names.dart';
+import 'package:word_generator/word_generator.dart';
 
 void main() {
   runTask1();
   runTask2();
+  runTask3();
 }
 
 void runTask1() {
@@ -72,4 +74,30 @@ void runTask2() {
   final uniqueNames2NotIn1 = uniqueNames2.difference(uniqueNames1);
   print("Імена, що є в uniqueNames2, але яких немає в uniqueNames1:");
   print(uniqueNames2NotIn1);
+}
+
+void runTask3() {
+  print('------------------- Task 3 -------------------');
+  final wordGenerator = WordGenerator();
+  final List<String> nounsList = List.generate(
+    50,
+    (index) => wordGenerator.randomNoun(),
+  );
+  print(nounsList);
+  print("-" * 10);
+
+  final Map<String, int> nounsMap = {};
+  for (String noun in nounsList) {
+    nounsMap[noun] = noun.length;
+  }
+  print(nounsMap);
+  print("-" * 10);
+
+  final Map<String, int> tempNouns = Map.fromEntries(
+    nounsMap.entries.where((entry) => entry.value % 2 == 0),
+  );
+  print(tempNouns);
+  print("-" * 10);
+
+  print(tempNouns.keys);
 }
