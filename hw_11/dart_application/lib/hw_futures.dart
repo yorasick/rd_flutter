@@ -14,16 +14,19 @@ Future<String> fetchAge() {
 
 Future<void> sequential() async {
   final stopwatch = Stopwatch()..start();
+
   final name = await fetchName();
   print('My name is $name');
   final int fetchNameExecTime = stopwatch.elapsedMilliseconds;
   print('fetchName() виконано за ${fetchNameExecTime} мс');
   stopwatch.reset();
+
   final age = await fetchAge();
   print('My age is $age');
   final int fetchAgeExecTime = stopwatch.elapsedMilliseconds;
   print('fetchAge() виконано за ${fetchAgeExecTime} мс');
   stopwatch.stop();
+
   print('Sequential execution time ${fetchNameExecTime + fetchAgeExecTime} ms');
 }
 
@@ -49,11 +52,12 @@ Future<String> delayedCountdown(int seconds) async {
   return 'Start!';
 }
 
-void main() async {
+Future<void> main() async {
   await sequential();
   print('--------------------------------');
   await parallel();
   print('--------------------------------');
   final result = await delayedCountdown(5);
   print(result);
+  print('--------------------------------');
 }
