@@ -12,14 +12,32 @@ Future<String> fetchAge() {
   );
 }
 
-void main() async {
+Future<void> sequential() async {
   final stopwatch = Stopwatch()..start();
   final name = await fetchName();
   print('My name is $name');
-  print('fetchName() виконано за ${stopwatch.elapsedMilliseconds} мс');
+  final int fetchNameExecTime = stopwatch.elapsedMilliseconds;
+  print('fetchName() виконано за ${fetchNameExecTime} мс');
   stopwatch.reset();
   final age = await fetchAge();
   print('My age is $age');
-  print('fetchAge() виконано за ${stopwatch.elapsedMilliseconds} мс');
+  final int fetchAgeExecTime = stopwatch.elapsedMilliseconds;
+  print('fetchAge() виконано за ${fetchAgeExecTime} мс');
   stopwatch.stop();
+  print('Sequential execution time ${fetchNameExecTime + fetchAgeExecTime} ms');
+}
+
+Future<void> parallel() async {
+  final stopwatch = Stopwatch()..start();
+  await Future.wait([fetchName(), fetchAge()]).then((value) {
+    print('My name is ${value[0]}');
+    print('My age is ${value[1]}');
+  });
+  print('Parallel execution time ${stopwatch.elapsedMilliseconds} ms');
+}
+
+void main() async {
+  await sequential();
+  print('--------------------------------');
+  await parallel();
 }
