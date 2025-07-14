@@ -36,8 +36,24 @@ Future<void> parallel() async {
   print('Parallel execution time ${stopwatch.elapsedMilliseconds} ms');
 }
 
+Future<String> delayedCountdown(int seconds) async {
+  if (seconds <= 0) {
+    throw Exception('Seconds must be greater than 0');
+  }
+
+  for (int i = seconds; i > 0; i--) {
+    print('$i...');
+    await Future.delayed(const Duration(seconds: 1));
+  }
+
+  return 'Start!';
+}
+
 void main() async {
   await sequential();
   print('--------------------------------');
   await parallel();
+  print('--------------------------------');
+  final result = await delayedCountdown(5);
+  print(result);
 }
