@@ -34,13 +34,14 @@ Future<void> reverseCountdown() async {
   }
 }
 
-void streamController() {
-  print('----------------Stream Controller----------------');
+void streamFromStreamController() {
+  print('----------------Stream from StreamController----------------');
   final streamController = StreamController<String>();
 
-  streamController.add('Hello');
-  streamController.add('World');
-  streamController.add('Dart');
+  streamController
+    ..add('Hello')
+    ..add('World')
+    ..add('Dart');
 
   streamController.stream.listen(
     (data) {
@@ -57,5 +58,5 @@ void streamController() {
 Future<void> main() async {
   await streamFromIterable();
   await reverseCountdown();
-  streamController();
+  streamFromStreamController();
 }
