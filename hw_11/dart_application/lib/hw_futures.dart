@@ -18,13 +18,13 @@ Future<void> sequential() async {
   final name = await fetchName();
   print('My name is $name');
   final int fetchNameExecTime = stopwatch.elapsedMilliseconds;
-  print('fetchName() виконано за ${fetchNameExecTime} мс');
+  print('fetchName() виконано за $fetchNameExecTime мс');
   stopwatch.reset();
 
   final age = await fetchAge();
   print('My age is $age');
   final int fetchAgeExecTime = stopwatch.elapsedMilliseconds;
-  print('fetchAge() виконано за ${fetchAgeExecTime} мс');
+  print('fetchAge() виконано за $fetchAgeExecTime мс');
   stopwatch.stop();
 
   print('Sequential execution time ${fetchNameExecTime + fetchAgeExecTime} ms');
